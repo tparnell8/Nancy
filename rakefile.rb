@@ -54,7 +54,11 @@ task :nuget_retrieve do
   CMD_PREFIX = ""
   if ENV['OS'] != 'Windows_NT'
     CMD_PREFIX = "mono --runtime=v4.0"
-    sh "mozroots --import --sync"
+    begin
+      sh "mozroots --import --sync"
+    rescue
+    end
+    
   end
   #Uncomment if we need solution-level deps
   #sh "#{CMD_PREFIX} #{NUGET}/nuget.exe i src/.nuget/packages.config -o src/packages"
